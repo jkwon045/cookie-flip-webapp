@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: black;
+  background-color: #2b2b2b;
   color: white;
   font-family: "Roboto", sans-serif;
   display: flex;
@@ -22,19 +22,19 @@ h1 {
 }
 
 .board {
-  border: 1rem solid #ff652f;
-  background: #ff652f;
-  width: 500px;
-  height: 500px;
+  border: 0.5rem solid #f1beb0;
+  background: #f1beb0;
+  width: 700px;
+  height: 700px;
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
-  gap: 1rem;
+  grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+  gap: 0.5rem;
 }
 
 .squares {
   background: #272727;
   border: none;
-  font-size: 5rem;
+  font-size: 3rem;
   /* font-weight: 800; */
   cursor: pointer;
   outline: none;
@@ -44,7 +44,7 @@ h1 {
   color: red;
 }
 .O {
-  color: green;
+  color: blue;
 }
 
 .info-wrapper {

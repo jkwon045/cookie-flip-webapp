@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Board from "./Board";
 
-const num_squares = 16;
+const num_squares = 64;
 
 const Game = () =>{
 	const [boards, setBoards] = useState([Array(num_squares).fill(null)]);
@@ -12,8 +12,12 @@ const Game = () =>{
 
 
 	const handleClick = (i) =>{
-	
+		const squares = boards[count];
+		
+		squares[i] = xO;
+		console.log(squares);
 
+		setXisNext(!xIsNext);
 
 	};
 
