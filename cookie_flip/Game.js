@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Board from "./Board";
+import { flipDetection } from "./Detect";
 
 const num_squares = 64;
 
@@ -13,9 +14,13 @@ const Game = () =>{
 
 	const handleClick = (i) =>{
 		const squares = boards[count];
-		
+		if(squares[i] !== null){
+			return;
+		}
 		squares[i] = xO;
-		console.log(squares);
+		//console.log(squares);
+		//game logic changing the board
+		flipDetection(squares, i);
 
 		setXisNext(!xIsNext);
 
