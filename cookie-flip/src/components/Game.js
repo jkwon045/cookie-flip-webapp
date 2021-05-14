@@ -44,6 +44,14 @@ const Game = () =>{
    maybe move this into its own separate file later?
    */
 function validMove(location, board, xO){
+	console.log("ABOVE : " + pieceExistsAbove(location, board, xO));
+	console.log("BELOW : " + pieceExistsBelow(location, board, xO));
+	console.log("LEFT : " + pieceExistsLeft(location, board, xO));
+	console.log("RIGHT : " + pieceExistsRight(location, board, xO));
+	console.log("BOTTOM LEFT : " + pieceExistsBottomLeft(location, board, xO));
+	console.log("BOTTOM RIGHT : " + pieceExistsBottomRight(location, board, xO));
+	console.log("TOP LEFT : " + pieceExistsTopLeft(location, board, xO));
+	console.log("TOP RIGHT : " + pieceExistsTopRight(location, board, xO));
 	return pieceExistsAbove(location, board, xO) || pieceExistsBelow(location, board, xO)
 			|| pieceExistsLeft(location, board, xO) || pieceExistsRight(location, board, xO)
 			|| pieceExistsBottomLeft(location, board, xO) || pieceExistsBottomRight(location, board, xO)
@@ -51,63 +59,82 @@ function validMove(location, board, xO){
 }
 
 function pieceExistsBottomLeft(location, board, xO){
-	var locationToCheck = location+9;
-	if( location%8 === 7 && (locationToCheck+9 < 0 || locationToCheck < 0 || board[locationToCheck] === xO)){
-		return false;
-	}
-
-	while( locationToCheck%8 !== 7 && locationToCheck < num_squares && board[locationToCheck] !== null ){
-		if( board[locationToCheck] === xO ){
-			return true;
-		}
-		locationToCheck+=9;
-	}
-	return false;
-}
-
-function pieceExistsBottomRight(location, board, xO){
 	var locationToCheck = location+7;
-	if( location%8 === 7 && (locationToCheck+7 < 0 || locationToCheck < 0 || board[locationToCheck] === xO)){
+
+	if( board[locationToCheck] === xO ){
 		return false;
 	}
 
-	while( locationToCheck%8 !== 7 && locationToCheck < num_squares && board[locationToCheck] !== null){
+	if( location%8 === 7 && ( locationToCheck+7 < 0 || locationToCheck < 0 )){
+		return false;
+	}
+
+	while( locationToCheck%8 !== 0 && locationToCheck < num_squares && board[locationToCheck] !== xO){
 		if( board[locationToCheck] === xO && board[locationToCheck] !== null ){
 			return true;
 		}
 		locationToCheck+=7;
 	}
-	return false;
+	return locationToCheck < num_squares && board[locationToCheck] === xO ;
+}
+
+function pieceExistsBottomRight(location, board, xO){
+	var locationToCheck = location+9;
+
+	if( board[locationToCheck] === xO ){
+		return false;
+	}
+
+	if( location%8 === 7 && (locationToCheck+9 < 0 || locationToCheck < 0 )){
+		return false;
+	}
+
+	while( locationToCheck%8 !== 7 && locationToCheck < num_squares && board[locationToCheck] !== xO ){
+		if( board[locationToCheck] === xO ){
+			return true;
+		}
+		locationToCheck+=9;
+	}
+	return locationToCheck < num_squares && board[locationToCheck] === xO;	
 }
 
 function pieceExistsTopLeft(location, board, xO){
 	var locationToCheck = location-9;
-	if( location%8 == 0 && (locationToCheck-9 < 0 || locationToCheck < 0 || board[locationToCheck] === xO )){
+
+	if( board[locationToCheck] === xO ){
+		return false;
+	}
+	if( location%8 === 0 && (locationToCheck-9 < 0 || locationToCheck < 0)){
 		return false;
 	}
 
-	while( locationToCheck%8 !== 0 && locationToCheck >= 0 && board[locationToCheck] === null ){
+	while( locationToCheck%8 !== 0 && locationToCheck >= 0 && board[locationToCheck] !== xO ){
 		if( board[locationToCheck] === xO ){
 			return true;
 		}
 		locationToCheck-=9;
 	}
-	return false;
+	return locationToCheck >= 0 && board[locationToCheck] === xO ;
 }
 
 function pieceExistsTopRight(location, board, xO){
 	var locationToCheck = location-7;
-	if( location%8 == 7 && (locationToCheck-7 < 0 || locationToCheck < 0 || board[locationToCheck] !== xO)){
+
+	if( board[locationToCheck] === xO ){
 		return false;
 	}
 
-	while( locationToCheck%8 !== 7 && locationToCheck >= 0 && board[locationToCheck] === null){
+	if( location%8 === 7 && (locationToCheck-7 < 0 || locationToCheck < 0) ){
+		return false;
+	}
+
+	while( locationToCheck%8 !== 7 && locationToCheck >= 0 && board[locationToCheck] !== xO){
 		if( board[locationToCheck] === xO ){
 			return true;
 		}
 		locationToCheck-=7;
 	}
-	return false;
+	return locationToCheck >= 0 && board[locationToCheck] === xO ;
 }
 
 function pieceExistsAbove(location, board, xO){
